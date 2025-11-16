@@ -19,14 +19,6 @@ router.post("/", async (req, res) => {
       await sendQueryAcknowledgement(query);
     }
 
-    // Emit real-time notification
-    req.io.emit("newQuery", {
-      type: "NEW_QUERY",
-      message: `New ${category} from ${customerName}`,
-      query: query,
-      timestamp: new Date(),
-    });
-
     res.status(201).json(query);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -66,12 +58,6 @@ router.put("/:id", async (req, res) => {
     }
 
     // Emit update notification
-    req.io.emit("queryUpdated", {
-      type: "QUERY_UPDATED",
-      message: `Query ${req.params.id} was updated`,
-      query: query,
-      timestamp: new Date(),
-    });
 
     res.json(query);
   } catch (error) {

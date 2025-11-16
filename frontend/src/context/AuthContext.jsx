@@ -22,7 +22,9 @@ export const AuthProvider = ({ children }) => {
     const checkLoggedIn = async () => {
       try {
         if (token) {
-          const response = await axios.get("http://localhost:5000/api/auth/me");
+          const response = await axios.get(
+            "https://query-management-system-oblu.onrender.com"
+          );
           setUser(response.data);
         }
       } catch (error) {
